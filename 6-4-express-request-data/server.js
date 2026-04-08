@@ -133,5 +133,13 @@ app.get("/echo", (req, res) => {
 });
 
 
+// Route params: /profile/First/Last
+app.get("/profile/:first/:last", (req, res) => {
+  const { first, last } = req.params;
+
+  res.json({ ok: true, fullName: `${first} ${last}` });
+});
+
+
 // Start the server by listening
 app.listen(3000, () => console.log("API running at http://localhost:3000"));
