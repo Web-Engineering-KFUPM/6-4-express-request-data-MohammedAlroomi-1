@@ -147,9 +147,7 @@ app.param("userId", (req, res, next, userId) => {
   const userIdNum = Number(userId);
 
   if (!Number.isFinite(userIdNum) || userIdNum <= 0) {
-    return res
-      .status(400)
-      .json({ ok: false, error: "userId must be positive number" });
+    return res.status(400).json({ ok: false, error: "userId must be positive number" });
   }
 
   req.userIdNum = userIdNum;
@@ -158,6 +156,9 @@ app.param("userId", (req, res, next, userId) => {
 
 
 // Route params: /users/:userId route
+app.get("/users/:userId", (req, res) => {
+  res.json({ ok: true, userId: req.userIdNum });
+});
 
 
 // Start the server by listening
