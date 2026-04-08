@@ -141,5 +141,18 @@ app.get("/profile/:first/:last", (req, res) => {
 });
 
 
+// Route param middleware example: /users/42
+app.param("userId", (req, res, next, userId) => {
+  const userIdNum = Number(userId);
+
+  if (!Number.isFinite(userIdNum) || userIdNum <= 0) {
+    return res.status(400).json({ ok: false, error: "userId must be positive number" });
+  }
+
+  req.userIdNum = userIdNum;
+  next();
+});
+
+
 // Start the server by listening
 app.listen(3000, () => console.log("API running at http://localhost:3000"));
